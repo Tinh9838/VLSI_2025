@@ -1,0 +1,94 @@
+Rất hay! Phần **1.7 – Example: A Simple MIPS Microprocessor** trong sách *CMOS VLSI Design* là một ví dụ cực kỳ quan trọng vì:
+
+* Nó **kết hợp tất cả những gì bạn học ở các phần trước**: transistor → gate → block → system.
+* Là **bài học điển hình về Design Partitioning + RTL**.
+* Nếu bạn đang làm CPU 8-bit hoặc đồ án tổ hợp HDL thì càng hữu ích.
+
+---
+
+## 🧠 **Mục tiêu phần 1.7 là gì?**
+
+Giúp bạn **hiểu cách thiết kế một vi xử lý đơn giản** theo từng tầng:
+
+* **Kiến trúc MIPS (ISA)**
+* **Vi kiến trúc (Microarchitecture)**
+* **Cấu trúc RTL và layout tổng thể**
+
+---
+
+## 🧱 **1.7.1 MIPS Architecture – Kiến trúc MIPS cơ bản**
+
+### 📌 Đặc điểm:
+
+* **32-bit** RISC (Reduced Instruction Set Computer)
+* **3 loại lệnh**: R-type (toán học), I-type (nhập/xuất), J-type (nhảy)
+* Thanh ghi: 32 thanh ghi, mỗi thanh ghi 32 bit
+* Gồm các lệnh đơn giản: `add`, `sub`, `lw`, `sw`, `beq`, `j`
+
+> ⏩ MIPS được chọn vì đơn giản, dễ pipeline, dễ tổ chức mạch.
+
+---
+
+## 🧰 **1.7.2 Multicycle MIPS Microarchitecture – Vi kiến trúc nhiều chu kỳ**
+
+> Thay vì xử lý mỗi lệnh trong 1 chu kỳ (single-cycle), MIPS này chia ra nhiều chu kỳ → **giảm phần cứng, dễ tổ chức logic**.
+
+### 💡 **Các bước xử lý lệnh** (mỗi bước là 1 chu kỳ):
+
+| Chu kỳ | Tên                         | Mô tả                       |
+| ------ | --------------------------- | --------------------------- |
+| 1      | **Instruction Fetch (IF)**  | Lấy lệnh từ bộ nhớ          |
+| 2      | **Instruction Decode (ID)** | Giải mã lệnh, đọc thanh ghi |
+| 3      | **Execute (EX)**            | Thực hiện ALU               |
+| 4      | **Memory (MEM)**            | Load/Store nếu có           |
+| 5      | **Writeback (WB)**          | Ghi kết quả vào thanh ghi   |
+
+✅ **Ưu điểm**:
+
+* ALU, RAM được chia thời gian dùng → tiết kiệm phần cứng
+* Mỗi chu kỳ thực hiện 1 phần nhỏ → dễ thiết kế điều khiển
+
+---
+
+## 🧠 **Cấu trúc khối tổng thể** gồm:
+
+* **Program Counter (PC)** – trỏ địa chỉ lệnh hiện tại
+* **Instruction Memory** – ROM chứa mã lệnh
+* **Register File** – tập thanh ghi
+* **ALU** – thực hiện toán học
+* **Data Memory** – chứa dữ liệu
+* **Control Unit** – bộ điều khiển FSM sinh tín hiệu điều khiển
+
+---
+
+## 📐 **Ví dụ thiết kế RTL cho lệnh `lw`**
+
+```verilog
+// Mô tả luồng dữ liệu (Register Transfer Level)
+IR = Mem[PC];        // IF
+PC = PC + 4;
+A = Reg[IR[25:21]];  // ID
+B = Reg[IR[20:16]];
+ALUOut = A + IR[15:0]; // EX
+MDR = Mem[ALUOut];     // MEM
+Reg[IR[20:16]] = MDR;  // WB
+```
+
+---
+
+## 🧰 **Bài học rút ra từ phần 1.7:**
+
+* **Tư duy chia tầng rõ ràng** (ISA → Vi kiến trúc → RTL)
+* Dùng **FSM để điều khiển tuần tự**
+* Sử dụng lại phần cứng → tiết kiệm tài nguyên
+* Mỗi bước xử lý lệnh tương ứng với trạng thái FSM → dễ code HDL
+
+---
+
+Bạn muốn mình:
+
+1. Vẽ sơ đồ block tổng quát của MIPS Multicycle?
+2. Viết thử RTL bằng Verilog cho 1 lệnh đơn giản (ví dụ: `lw`)?
+3. Giúp bạn làm CPU 8-bit theo kiểu này?
+
+Bạn chọn hướng nào?
