@@ -1,0 +1,64 @@
+Tuyệt! Phần 1.13 – Summary and a Look Ahead trong sách CMOS VLSI Design là phần tổng kết chương 1 và định hướng cho các chương tiếp theo. Đây là nơi tác giả giúp bạn:
+
+Nhìn lại toàn bộ quy trình thiết kế chip CMOS từ đầu đến cuối
+
+Thấy được bức tranh lớn: từ ý tưởng → logic → layout → sản xuất
+
+Biết bạn sẽ học gì tiếp theo
+
+🧠 Tóm tắt nội dung chương 1 – “Introduction”
+✅ 1. Thiết kế VLSI gồm nhiều tầng trừu tượng:
+Từ phần mềm (ISA, C code)
+
+Sang RTL (Verilog/VHDL)
+
+Sang cổng logic
+
+Sang transistor CMOS
+
+Sang layout vật lý
+
+Sang wafer silicon thật
+
+📌 Điều này giúp bạn chia nhỏ vấn đề phức tạp → dễ kiểm soát & tối ưu.
+
+✅ 2. CMOS là công nghệ nền tảng
+Dùng PMOS và NMOS để xây logic gate (inverter, NAND, NOR…)
+
+CMOS giúp tiết kiệm điện, ổn định, sản xuất quy mô lớn
+
+✅ 3. Thiết kế chip cần tư duy theo khối
+Datapath + Control
+
+RTL → Synthesis → Physical Design
+
+Verification rất quan trọng (functional + timing + DRC/LVS…)
+
+✅ 4. Quy trình đầy đủ từ idea → chip:
+scss
+Copy code
+Ý tưởng chức năng
+    ↓
+RTL (Verilog/VHDL)
+    ↓
+Logic gates (synthesis)
+    ↓
+Layout (physical design)
+    ↓
+GDSII → gửi xưởng chế tạo
+    ↓
+Fabrication → Packaging → Testing
+🔭 A Look Ahead – Chương tiếp theo sẽ có gì?
+Tác giả sẽ dẫn bạn đi vào từng tầng thiết kế chi tiết hơn, ví dụ:
+
+Chương	Nội dung chính
+Chương 2	MOS Transistor – hiểu dòng, điện áp, cấu trúc vật lý
+Chương 3	CMOS Process – hiểu cách sản xuất từng lớp (poly, n+, metal...)
+Chương 4	Delay – học cách tính độ trễ tín hiệu, RC model, Logical Effort
+Chương 5	Power – tính và tối ưu công suất tiêu thụ
+
+📌 Mỗi chương sau sẽ giúp bạn tối ưu thiết kế hơn: chạy nhanh hơn, tốn ít điện hơn, chiếm ít diện tích hơn.
+
+✅ Kết luận chương 1:
+Bạn không chỉ học thiết kế logic, mà học để tạo ra 1 con chip thật – chạy được, sản xuất được, kiểm thử được.
+Toàn bộ chương 1 là bản đồ định hướng cho hành trình đó.
