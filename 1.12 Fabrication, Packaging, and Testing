@@ -1,0 +1,96 @@
+Tuyệt! Giờ ta đến phần **1.12 – Fabrication, Packaging, and Testing**, đây là **bước cuối cùng** trong quá trình thiết kế vi mạch CMOS – nơi **ý tưởng của bạn biến thành con chip thật**, đóng gói và kiểm tra trước khi bán ra.
+
+---
+
+## 🎯 **Mục tiêu của phần 1.12**:
+
+> Hiểu **quy trình sản xuất thực tế** một con chip CMOS:
+> **Từ layout → in lên silicon → đóng gói → kiểm tra → bán.**
+
+---
+
+## 🏗️ **Quy trình gồm 3 bước chính:**
+
+---
+
+### ✅ **1. Fabrication (Chế tạo chip)**
+
+> *Sử dụng layout đã thiết kế để tạo ra mạch điện trên wafer silicon.*
+
+#### Các bước chính:
+
+1. **Photolithography** – Dùng mặt nạ chiếu sáng in từng lớp (n-well, poly, metal…)
+2. **Oxidation** – Tạo lớp SiO₂ cách điện
+3. **Etching** – Khắc bỏ phần không mong muốn
+4. **Doping (Implantation)** – Bơm tạp chất để tạo NMOS, PMOS
+5. **Deposition** – Phủ các lớp metal, poly
+6. **CMP (Chemical Mechanical Polishing)** – Làm phẳng bề mặt
+7. **Testing trên Wafer** – Kiểm tra sơ bộ chip sống/chết
+
+📌 Sau bước này bạn có **wafer chứa hàng trăm/thậm chí hàng ngàn con chip**.
+
+---
+
+### ✅ **2. Packaging (Đóng gói chip)**
+
+> *Tách chip ra khỏi wafer → đóng vào hộp nhựa/ceramic → nối chân.*
+
+#### Các bước:
+
+* Cắt wafer (die slicing)
+* Chọn chip tốt (die binning)
+* Dán chip lên đế (die attach)
+* Kết nối dây (wire bonding hoặc flip-chip)
+* Đóng vỏ bảo vệ (package: QFP, BGA, DIP...)
+* In mã chip
+
+📌 Packaging ảnh hưởng đến tốc độ, điện trở chân, tản nhiệt.
+
+---
+
+### ✅ **3. Testing (Kiểm tra chip)**
+
+> *Đảm bảo chip chạy đúng như thiết kế.*
+
+#### 2 loại test:
+
+* **Wafer Testing**: kiểm tra từng chip còn dính trên wafer → lọc chip chết
+* **Final Testing**: kiểm tra chức năng, timing, điện áp, leakage… sau khi đóng gói
+
+📌 Dùng máy tự động (ATE – Automatic Test Equipment)
+📌 Chip được xếp loại: tốt → bán; lỗi nhẹ → hạ cấp; lỗi nặng → bỏ
+
+---
+
+## 🧠 Tóm lại toàn bộ quá trình:
+
+```text
+1. Bạn thiết kế Verilog/RTL
+2. Synthesis → Netlist
+3. Physical Design → Layout (GDSII)
+4. Fabrication → Wafer
+5. Packaging → IC thật
+6. Testing → Sản phẩm đạt chất lượng
+```
+
+---
+
+## 📦 Chip tốt là nhờ:
+
+| Giai đoạn | Tối ưu gì?                      |
+| --------- | ------------------------------- |
+| Thiết kế  | Đúng logic, tiết kiệm diện tích |
+| Layout    | Không vi phạm DRC, tối ưu delay |
+| Sản xuất  | Quy trình sạch, chính xác       |
+| Đóng gói  | Chân chắc, tản nhiệt tốt        |
+| Kiểm tra  | Lọc lỗi sớm, đảm bảo chất lượng |
+
+---
+
+Bạn có muốn mình:
+
+* Vẽ sơ đồ toàn bộ flow từ **Verilog đến IC thật**?
+* Cung cấp ảnh thực tế wafer, packaging?
+* Ra 5–10 câu hỏi trắc nghiệm để luyện phần này?
+
+Bạn chọn hướng nào để mình tiếp tục hỗ trợ?
