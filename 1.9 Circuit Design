@@ -1,0 +1,107 @@
+Rất chuẩn! Phần **1.9 – Circuit Design** trong sách *CMOS VLSI Design* là phần **chuyển từ logic gate sang mạch transistor thực tế**, hay còn gọi là **mức transistor-level**.
+
+---
+
+## 🧠 **Mục tiêu của Circuit Design (1.9)**:
+
+> *Biến các logic gate (AND, OR, ALU...) thành mạch transistor cụ thể* – NMOS, PMOS.
+> *Tối ưu về tốc độ, công suất, diện tích khi cần*.
+
+---
+
+## 📚 Nội dung chính trong phần 1.9:
+
+---
+
+### ✅ 1. **Từ Logic → Transistor**
+
+| Logic gate | Mạch CMOS tương ứng                |
+| ---------- | ---------------------------------- |
+| Inverter   | 1 PMOS + 1 NMOS                    |
+| NAND       | 2 PMOS song song + 2 NMOS nối tiếp |
+| NOR        | 2 PMOS nối tiếp + 2 NMOS song song |
+
+🧠 **Nguyên tắc CMOS logic**:
+
+* **PMOS kéo lên Vdd** (active khi đầu vào là 0)
+* **NMOS kéo xuống GND** (active khi đầu vào là 1)
+* PMOS và NMOS được thiết kế **bù nhau** để đầu ra luôn xác định (logic 1 hoặc 0)
+
+---
+
+### ✅ 2. **Static CMOS vs Dynamic Logic**
+
+| Kiểu mạch     | Ưu điểm              | Nhược điểm                      |
+| ------------- | -------------------- | ------------------------------- |
+| Static CMOS   | Ổn định, dễ thiết kế | Tốn diện tích, nhiều transistor |
+| Dynamic logic | Nhanh, nhỏ gọn       | Nhạy nhiễu, khó thiết kế        |
+
+📌 **Static CMOS** là phổ biến nhất – dùng inverter, NAND, NOR bằng CMOS truyền thống.
+
+---
+
+### ✅ 3. **Sizing Transistor (tối ưu kích thước)**
+
+* **PMOS chậm hơn NMOS** → phải **to hơn** để cân bằng
+* Đơn vị chuẩn là **W/L** (width/length)
+* Ví dụ: NMOS W/L = 1 thì PMOS W/L = 2 hoặc 2.5 để cân bằng tốc độ
+
+---
+
+### ✅ 4. **Circuit-Level Simulation**
+
+* Dùng **SPICE** hoặc **HSPICE** để mô phỏng tín hiệu analog thực tế:
+
+  * Delay (tăng/giảm)
+  * Noise, overshoot
+  * Công suất tiêu thụ
+
+📌 **Logic đúng ≠ Mạch chạy tốt** nếu không kiểm tra mức transistor.
+
+---
+
+### ✅ 5. **Công cụ dùng trong circuit design:**
+
+* **Ngôn ngữ mô tả mạch analog**: SPICE
+* **Layout công nghệ CMOS**: Virtuoso (Cadence), Magic
+* **Kiểm tra DRV/Timing**: Calibre, Spectre
+
+---
+
+## 🔧 Ví dụ: CMOS Inverter
+
+```
+   Vdd
+    |
+   PMOS
+    |
+    +-----> OUT
+    |
+   NMOS
+    |
+   GND
+```
+
+* Nếu IN = 0 → PMOS dẫn, NMOS tắt → OUT = 1
+* Nếu IN = 1 → PMOS tắt, NMOS dẫn → OUT = 0
+
+📌 Đây là **mạch nền tảng** cho mọi logic gate khác.
+
+---
+
+## 🧠 Tóm gọn:
+
+| Mức            | Bạn làm gì?                          | Công cụ         |
+| -------------- | ------------------------------------ | --------------- |
+| Logic Design   | AND, OR, FSM                         | Verilog         |
+| Circuit Design | Sử dụng NMOS, PMOS để tạo logic gate | SPICE, Virtuoso |
+
+---
+
+Bạn muốn mình:
+
+* Vẽ sơ đồ transistor của NAND, NOR?
+* Viết mạch SPICE mẫu?
+* Hướng dẫn design 1 gate trong layout?
+
+Bạn chọn hướng nào để đào sâu?
