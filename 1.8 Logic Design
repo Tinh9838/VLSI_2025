@@ -1,0 +1,103 @@
+Tuyệt! Phần **1.8 – Logic Design** trong sách *CMOS VLSI Design* (Weste & Harris) là **mắt xích quan trọng** nối từ ý tưởng hệ thống (như MIPS CPU ở 1.7) xuống **mạch logic cụ thể** bạn có thể viết bằng Verilog hoặc vẽ gate-level.
+
+---
+
+## 🎯 Mục tiêu của phần 1.8:
+
+> Biến thiết kế cấp cao (ISA, FSM, datapath) thành **logic gate cụ thể**
+> → để tổng hợp (synthesis) ra mạch vật lý thật trên chip hoặc FPGA.
+
+---
+
+## 📚 Nội dung chính bạn cần nắm:
+
+---
+
+### ✅ **1. Combinational Logic (Tổ hợp)**
+
+* Là mạch **không có nhớ**, đầu ra phụ thuộc hoàn toàn vào đầu vào hiện tại.
+* Gồm:
+
+  * AND, OR, NOT
+  * Multiplexers
+  * Decoders
+  * Adders, Comparators
+
+📌 **Dùng để xử lý dữ liệu**, ví dụ như ALU.
+
+---
+
+### ✅ **2. Sequential Logic (Tuần tự)**
+
+* Có thêm **state (trạng thái)** → nhớ được thông tin trước đó.
+* Gồm:
+
+  * D Flip-Flop, Latch
+  * Counters
+  * FSM (Finite State Machine)
+  * Registers, Shift registers
+
+📌 **Dùng để điều khiển và lưu trữ** – ví dụ: bộ điều khiển CPU, Program Counter, thanh ghi.
+
+---
+
+### ✅ **3. Finite State Machines (FSM)**
+
+* Mô hình điều khiển gồm:
+
+  * **Trạng thái hiện tại**
+  * **Tín hiệu đầu vào**
+  * **Luật chuyển trạng thái**
+  * **Tín hiệu đầu ra**
+
+📌 Là trái tim của các bộ điều khiển trong CPU, giao tiếp UART, SPI, v.v.
+
+---
+
+### ✅ **4. Datapath and Control – Tách điều khiển và dữ liệu**
+
+* **Datapath**: gồm ALU, register file, mux, RAM… xử lý dữ liệu
+* **Control**: FSM sinh tín hiệu điều khiển từng khối trong datapath
+
+📌 Cấu trúc này là xương sống của thiết kế CPU hoặc bất kỳ hệ thống số lớn nào.
+
+---
+
+## 💡 Tóm lại:
+
+> **Logic Design** là cầu nối giữa **kiến trúc phần mềm (ISA)** và **phần cứng vật lý**.
+> Bạn cần hiểu logic tổ hợp, logic tuần tự, FSM, và cách chia datapath/control.
+
+---
+
+## 🧱 Ví dụ minh họa:
+
+### Thiết kế đơn giản: `if (A > B) Y = A; else Y = B;`
+
+* **Combinational logic**:
+
+```verilog
+assign Y = (A > B) ? A : B;
+```
+
+### Thiết kế FSM đơn giản (traffic light controller):
+
+```verilog
+always @(posedge clk) begin
+  case (state)
+    RED: state <= GREEN;
+    GREEN: state <= YELLOW;
+    YELLOW: state <= RED;
+  endcase
+end
+```
+
+---
+
+Bạn muốn mình:
+
+* Vẽ sơ đồ FSM mẫu?
+* Giải bài thiết kế datapath của một phép cộng/multiplexer?
+* Viết HDL mẫu dùng trong đồ án của bạn?
+
+Bạn chọn phần nào để đào sâu?
