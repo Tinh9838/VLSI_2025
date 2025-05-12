@@ -1,0 +1,132 @@
+Tuyệt! Ta cùng đi sâu vào **1.10 – Physical Design** trong sách *CMOS VLSI Design* – đây là **giai đoạn cuối trong quá trình thiết kế chip**, nơi **thiết kế logic được chuyển thành hình dạng vật lý trên silicon**.
+
+---
+
+## 🧠 **1.10 – Physical Design là gì?**
+
+> **Physical Design** là quá trình **chuyển đổi mạch logic (gate-level netlist)** thành **bản vẽ layout thực tế**, gồm các lớp kim loại, poly, diffusion…
+> Từ đó, có thể **in trực tiếp lên wafer silicon để tạo ra con chip thật.**
+
+---
+
+## 🧱 **Các bước chính trong Physical Design**
+
+---
+
+### ✅ 1. **Floorplanning**
+
+> *Chia vùng chip theo chức năng để dễ bố trí và đi dây.*
+
+* Đặt các khối chức năng (ALU, control, RAM...) ở vị trí hợp lý.
+* Xác định kích thước chip (die), vùng I/O, vùng core.
+* Mục tiêu:
+
+  * Tối ưu diện tích
+  * Giảm chiều dài dây
+  * Tránh nghẽn routing
+
+---
+
+### ✅ 2. **Placement**
+
+> *Đặt các standard cell (NAND, INV, FF...) vào vùng core.*
+
+* Các cell này được chọn từ **standard cell library**.
+* Phần mềm tự động tối ưu vị trí để giảm delay và congestion.
+* Giữ cho dây kết nối ngắn và đều.
+
+---
+
+### ✅ 3. **Clock Tree Synthesis (CTS)**
+
+> *Tạo cây phân phối clock để đảm bảo đồng bộ giữa các flip-flop.*
+
+* Nếu không làm tốt → xảy ra **clock skew**, gây sai thời gian (timing error).
+* Phân nhánh clock đến tất cả flip-flop sao cho delay gần bằng nhau.
+
+---
+
+### ✅ 4. **Routing**
+
+> *Kết nối các cell bằng dây kim loại.*
+
+* Dùng nhiều lớp kim loại (metal1, metal2, ... metalN)
+* Tự động tạo contact, via giữa các lớp
+* Đảm bảo không giao nhau, không vi phạm DRC
+
+---
+
+### ✅ 5. **Design Rule Check (DRC)**
+
+> *Kiểm tra xem layout có tuân thủ công nghệ chế tạo không.*
+
+* Các quy tắc: khoảng cách, kích thước, lớp chồng…
+* Nếu DRC lỗi → chip không thể sản xuất.
+
+---
+
+### ✅ 6. **Layout vs. Schematic (LVS)**
+
+> *So sánh layout với netlist thiết kế logic ban đầu.*
+
+* Đảm bảo layout **đúng logic chức năng**
+* Nếu LVS fail → chip có thể chạy sai
+
+---
+
+### ✅ 7. **Parasitic Extraction & Timing Analysis**
+
+* Tính điện trở, điện dung dây (RC) sinh ra trong layout.
+* Dùng để **tính chính xác delay mạch** (STA – Static Timing Analysis)
+
+---
+
+### ✅ 8. **Tape-Out**
+
+> *Xuất layout thành file GDSII → gửi sang xưởng (foundry).*
+
+* File GDSII chứa tất cả lớp layout: active, poly, n-well, metal...
+* Xưởng dùng nó để tạo mặt nạ quang học in lên wafer silicon.
+
+---
+
+## 🧠 Tóm gọn bằng hình:
+
+```
+Verilog (RTL)
+   ↓
+Synthesis → Netlist (gates)
+   ↓
+Floorplanning
+   ↓
+Placement
+   ↓
+CTS (Clock Tree)
+   ↓
+Routing
+   ↓
+DRC + LVS + Timing
+   ↓
+GDSII → Tape-out
+```
+
+---
+
+## 📌 Mục tiêu của Physical Design:
+
+| Tối ưu gì?       | Vì sao quan trọng?             |
+| ---------------- | ------------------------------ |
+| Diện tích chip   | Giảm giá thành sản xuất        |
+| Timing           | Tránh lỗi thời gian, nhanh hơn |
+| Công suất        | Tiết kiệm điện, bớt nóng       |
+| Khả năng chế tạo | Không lỗi khi sản xuất         |
+
+---
+
+## 🎁 Bạn muốn gì tiếp?
+
+* Mình vẽ sơ đồ toàn bộ **design flow từ RTL → GDSII**?
+* Cho bạn ví dụ **layout thực tế của 1 inverter / NAND**?
+* Tạo **câu hỏi trắc nghiệm luyện thi** phần Physical Design?
+
+Bạn chọn hướng nào?
