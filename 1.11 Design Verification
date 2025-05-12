@@ -1,0 +1,107 @@
+Rất tuyệt! Phần **1.11 – Design Verification** trong *CMOS VLSI Design* là một **giai đoạn cực kỳ quan trọng** trong quy trình thiết kế chip — nhằm đảm bảo **thiết kế đúng như mong đợi** **trước khi đi chế tạo** (tape-out).
+
+---
+
+## 🎯 **Mục tiêu của Design Verification**
+
+> **Đảm bảo rằng thiết kế hoạt động đúng chức năng, đúng timing, và đúng layout.**
+> Nếu không làm kỹ bước này → **chip sản xuất ra có thể không hoạt động hoặc lỗi nặng → tốn hàng triệu USD.**
+
+---
+
+## 🧠 **Các loại kiểm tra chính trong Design Verification**
+
+---
+
+### ✅ 1. **Functional Verification** *(Mức logic / RTL)*
+
+> Kiểm tra xem **thiết kế có làm đúng chức năng không**
+> (giống như test phần mềm vậy)
+
+* Dùng: **Testbench, Simulation**
+* Viết bằng: Verilog testbench / SystemVerilog / VHDL / UVM
+* Kiểm tra các khối như ALU, RAM, FSM, UART…
+* Chạy giả lập tất cả các lệnh, case đặc biệt, ngõ vào bất thường
+
+📌 Là bước **sớm nhất**, giúp phát hiện lỗi logic trước khi chuyển sang layout.
+
+---
+
+### ✅ 2. **Static Timing Analysis (STA)**
+
+> Kiểm tra xem **các đường tín hiệu có đúng thời gian không**
+> (đủ setup/hold time, không vi phạm clock constraints)
+
+* Không dùng vector kiểm tra, chỉ phân tích delay + clock path
+* Sử dụng tool như: **PrimeTime**, **Tempus**
+
+📌 Giúp phát hiện lỗi **racing, hold violation, clock skew**
+
+---
+
+### ✅ 3. **Formal Verification**
+
+> So sánh **RTL và Netlist (hoặc Layout)** để đảm bảo không sai khác chức năng.
+
+* Dùng tool: **Conformal, Formality**
+* Cực kỳ quan trọng sau khi tổng hợp (synthesis)
+* Kiểm tra mọi đường logic → không cần test case → đảm bảo toán học
+
+---
+
+### ✅ 4. **Equivalence Checking**
+
+> Đảm bảo rằng:
+
+* RTL == Netlist sau tổng hợp
+* Netlist == Layout sau place & route
+
+📌 Loại bỏ rủi ro sai chức năng do lỗi tool/tối ưu hóa
+
+---
+
+### ✅ 5. **DRC / LVS (ở mức layout)**
+
+* **DRC (Design Rule Check)**: kiểm tra layout có đúng quy tắc công nghệ không (khoảng cách, lớp chồng, via…)
+* **LVS (Layout vs Schematic)**: kiểm tra **layout có đúng logic** như sơ đồ nguyên lý không
+
+📌 Nếu DRC/LVS lỗi → chip không sản xuất được hoặc chạy sai
+
+---
+
+## 🧭 Vị trí của Verification trong Flow tổng thể:
+
+```
+RTL Design (Verilog)
+   ↓
+Functional Simulation  ←------------+
+   ↓                                 |
+Synthesis → Netlist                  |
+   ↓                                 |
+Equivalence Check                    |
+   ↓                                 |
+Static Timing Analysis               |
+   ↓                                 |
+Place & Route → Layout               |
+   ↓                                 |
+DRC / LVS ← Formal / Equivalence ---+
+   ↓
+Tape-out
+```
+
+---
+
+## ✅ Kết luận:
+
+> 📌 **Verification = Bảo hiểm cho thiết kế chip**
+> Làm tốt verification giúp **tiết kiệm chi phí, thời gian**, tránh tape-out lỗi.
+
+---
+
+## 🎁 Bạn muốn mình:
+
+* Viết testbench mẫu cho 1 module Verilog?
+* Vẽ sơ đồ tổng hợp các loại verification dễ ghi nhớ?
+* Ra 5–10 câu trắc nghiệm ôn phần này?
+
+Bạn chọn hướng nào?
