@@ -1,0 +1,8 @@
+Design Partitioning = Chia nhỏ hệ thống lớn
+→ dễ thiết kế – kiểm thử – mở rộng
+
+Gồm 3 tầng:
+- Behavioral: thiết kế theo chức năng
+- Structural: tổ chức module con
+- Physical: layout và kết nối thật
+( giống rtl )
