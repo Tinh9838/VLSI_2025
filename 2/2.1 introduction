@@ -1,0 +1,103 @@
+Chương 2 của sách **"CMOS VLSI Design"** tập trung vào lý thuyết **MOS Transistor** – nền tảng cơ bản của mọi cổng logic CMOS. Dưới đây là tóm tắt phần **2.1 Introduction**:
+
+---
+
+### 📘 **2.1 Introduction – Giới thiệu**
+
+#### ✅ Mục tiêu:
+
+Phần mở đầu này giới thiệu lý do tại sao transistor MOS là thành phần **cốt lõi** trong thiết kế VLSI hiện đại và mô tả sơ lược **cấu trúc vật lý** cũng như **nguyên lý hoạt động** cơ bản của nó.
+
+---
+
+### ✅ Nội dung chính:
+
+1. **CMOS Technology = NMOS + PMOS**
+
+   * CMOS viết tắt của *Complementary MOS* – tức là sử dụng cả transistor **NMOS** và **PMOS** để xây dựng mạch logic.
+   * NMOS: dẫn điện khi **Vgs > Vth**
+   * PMOS: dẫn điện khi **Vgs < Vth** (tức là cần điện áp âm hơn so với nguồn)
+
+2. **Tại sao dùng CMOS?**
+
+   * **Công suất thấp khi không chuyển trạng thái** (static power ≈ 0)
+   * **Tốc độ cao**
+   * **Tích hợp mật độ lớn**
+   * So với công nghệ TTL cũ, CMOS **hiệu quả năng lượng hơn nhiều**
+
+3. **Transistor hoạt động như một công tắc (Switch)**
+
+   * Khi được bật (on): Cho dòng điện đi qua (channel dẫn được hình thành)
+   * Khi tắt (off): Không có dòng chảy
+   * Từ đó có thể tạo thành **cổng logic**, **mux**, **latch**, **flip-flop**, v.v.
+
+4. **Vai trò của chương này:**
+
+   * Từ hiểu hoạt động điện học của transistor → **hiểu timing, năng lượng, delay** ở cấp hệ thống
+   * Là nền tảng để hiểu **phần cứng thực sự làm gì khi bạn viết code RTL**
+
+---
+
+### ✅ Ví dụ dễ hiểu:
+
+* Khi bạn viết `if (a) b = 1;`, bạn có thể tưởng tượng **một transistor đang được bật** để kết nối đường `b` với điện áp cao (Vdd).
+* Nếu hiểu được lúc nào nó bật/tắt, dòng điện chảy ra sao → bạn có thể tối ưu RTL **để tránh glitch, giảm delay**.
+
+---
+Cụm **"hiểu timing, năng lượng, delay ở cấp hệ thống"** nghĩa là:
+
+---
+
+### ✅ **1. Timing (thời gian đáp ứng mạch)**
+
+Bạn cần biết:
+
+* Khi nào **một tín hiệu chuyển từ 0 sang 1** (hoặc ngược lại)?
+* Tín hiệu đó có đến **kịp thời** hay **bị trễ** không?
+* Những yếu tố như **RC delay**, **fanout**, **số lượng transistor nối tiếp** ảnh hưởng đến **thời gian lan truyền tín hiệu** trong mạch.
+  ➡ Trong RTL, bạn có thể viết `q <= d;`, nhưng nếu không hiểu delay, bạn sẽ **viết ra mạch sai thời điểm**, dẫn đến **setup/hold violation** hoặc **glitch**.
+
+---
+
+### ✅ **2. Năng lượng (power consumption)**
+
+Việc hiểu transistor CMOS giúp bạn:
+
+* Biết khi nào mạch **tiêu thụ năng lượng**: chuyển trạng thái → năng lượng động (dynamic power).
+* Khi nào mạch **gần như không tiêu tốn**: giữ nguyên trạng thái → gần như không có static power.
+
+> Nếu bạn viết RTL kiểu `always @(posedge clk) begin x = x + 1; end` **mọi chu kỳ** thì mạch **sẽ tiêu thụ năng lượng nhiều**, dù có cần thiết hay không.
+> ➡ Hiểu năng lượng giúp **viết RTL tối ưu**, tránh những **mạch logic dư thừa**.
+
+---
+
+### ✅ **3. Delay (độ trễ truyền tín hiệu)**
+
+Hiểu bản chất transistor giúp bạn:
+
+* Biết cổng NAND nhanh hơn cổng XOR.
+* Biết khi nào delay giữa hai tín hiệu là lệch nhau quá nhiều gây **skew**, **metastability**, hoặc **race condition**.
+
+---
+
+### 🔁 Tại sao **viết RTL mà vẫn cần hiểu vật lý CMOS?**
+
+Vì RTL chỉ là **lớp trừu tượng**. Việc **chuyển từ RTL → mạch thực** (synthesis → layout → silicon) vẫn tuân theo các giới hạn vật lý:
+
+* Transistor thật **không thể chuyển trạng thái ngay lập tức**.
+* Không dây nào **dài vô tận** mà không có điện trở hoặc điện dung.
+* Không thể **chạy clock nhanh vô hạn** nếu không hiểu timing.
+
+---
+
+👉 **Hiểu sâu phần vật lý → Viết RTL đúng, tối ưu, và thực thi được trên chip thật.**
+Bạn muốn mình minh họa trực quan 1 ví dụ RTL và phân tích delay / năng lượng / timing từ nó không?
+
+
+### 📌 Kết luận phần 2.1:
+
+Đây là phần **giới thiệu động lực** cho toàn chương: hiểu được **trái tim vật lý** của mọi thiết kế số — transistor CMOS, từ đó đi sâu vào các mô hình toán học, đặc tuyến, và ảnh hưởng tới logic và hệ thống.
+
+---
+
+Bạn muốn mình tiếp tục tóm tắt phần **2.2 – MOS Structure and Operation** không? Đây là phần bắt đầu đi vào chi tiết về **cấu trúc cổng MOS, vùng depletion/inversion** và điều gì xảy ra khi áp điện áp lên gate.
